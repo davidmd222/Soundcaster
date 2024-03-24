@@ -1,6 +1,5 @@
 "use client";
-
-import { useState, useEffect, React } from "react";
+import { useState, useEffect } from "react";
 import { useFarcasterIdentity } from "@/utils/use-farcaster-identity";
 import { Nav } from "@/components/nav";
 import { Button } from "@/components/ui/button";
@@ -11,14 +10,23 @@ import { PrivyProvider } from "@privy-io/react-auth";
 type Video = {
   downloadUrl: string;
   name: string;
+  score?: Score; // Add optional Score field to Video type
+};
+
+type Score = {
+  fid: number;
+  fname: string;
+  username: string;
+  rank: number;
+  score: number;
+  percentile: number;
 };
 
 function VideoFrame({ src }: { src: string }) {
   return (
     <div className="video-frame w-full">
-      <video controls className="w-full" src={src}>
-      </video>
-    </div >
+      <video controls className="w-full" src={src}></video>
+    </div>
   );
 }
 
@@ -31,30 +39,43 @@ function VideoActions({ name }: { name: string }) {
   );
 }
 
-export default function Page({ }: {
-  searchParams: Record<string, string>;
-}): JSX.Element {
+export default function Home() {
   const [open, setOpen] = useState(false);
-  const [channel, setChannel] = useState<string>("chain://eip155:7777777/erc721:0x36ef4ed7a949ee87d5d2983f634ae87e304a9ea2");
   const [videos, setVideos] = useState<Video[]>([]);
-  const { farcasterUser, loading, startFarcasterSignerProcess, logout } = useFarcasterIdentity();
+  const [scores, setScores] = useState<Score[]>([]);
+  const { loading, startFarcasterSignerProcess, logout } = useFarcasterIdentity();
 
   useEffect(() => {
-    async function fetchVideos() {
+    const fetchData = async () => {
       try {
-        const response = await fetch("/api/videos");
-        if (!response.ok) {
+        // Fetch videos
+        const videosResponse = await fetch("/api/videos");
+        if (!videosResponse.ok) {
           throw new Error("Failed to fetch videos");
         }
-        const data = await response.json();
-        console.log({ data })
-        setVideos(data);
-      } catch (error) {
-        console.error("Error fetching videos:", error);
-      }
-    }
+        const videosData = await videosResponse.json();
+        setVideos(videosData);
 
-    fetchVideos();
+        // Fetch scores from the new API route
+        const scoresResponse = await fetch("/api/scores");
+        if (!scoresResponse.ok) {
+          throw new Error("Failed to fetch scores");
+        }
+        const scoresData = await scoresResponse.json();
+        setScores(scoresData.result);
+
+        // Map scores to videos using index as identifier
+        const videosWithScores = videosData.map((video, index) => {
+          const score = scoresData.result[index];
+          return { ...video, score };
+        });
+        setVideos(videosWithScores);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -70,7 +91,7 @@ export default function Page({ }: {
     >
       <div className="flex flex-col min-h-screen w-full sm:px-0 px-3 justify-center items-center gap-6 mb-6">
         <Dialog open={open} onOpenChange={setOpen}>
-          <Nav setChannel={setChannel} />
+          <Nav />
           <DialogTrigger asChild>
             <Button className="sm:w-[500px] w-full mt-4" variant="outline">
               +
@@ -81,11 +102,16 @@ export default function Page({ }: {
               <div key={index}>
                 <VideoFrame src={video.downloadUrl} />
                 <VideoActions name={video.name} />
+                {video.score && (
+                  <div>
+                    <p>Rank: {video.score.rank}, Score: {video.score.score.toFixed(4)}, Percentile: {video.score.percentile}</p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
         </Dialog>
-      </div >
-    </PrivyProvider >
+      </div>
+    </PrivyProvider>
   );
 }
