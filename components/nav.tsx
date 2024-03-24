@@ -1,3 +1,4 @@
+"use client";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
@@ -5,21 +6,16 @@ import { LoginWindow } from "./login-window";
 import { useFarcasterIdentity } from "@/utils/use-farcaster-identity";
 import { UserRound } from "lucide-react";
 import { ChannelSwitch } from "./channel-change";
+import { PrivyProvider, usePrivy } from "@privy-io/react-auth";
 
 export function Nav({ setChannel }: any) {
-  const { farcasterUser, loading, startFarcasterSignerProcess, logout } =
-    useFarcasterIdentity();
-
+  const { login } = usePrivy();
   return (
-    <div className="fixed top-0 left-40 right-0 z-10 bg-black shadow-md">
-    <div className="flex justify-between w-full items-center sm:w-[900px] mt-6">
+    <div className="flex justify-between w-full items-center sm:w-[500px] mt-6">
       <Dialog>
         <div className="flex flex-col">
           <h1 className="font-display sm:text-4xl text-3xl">Soundcaster</h1>
-          <p>
-            Listen to Earn $HEARD <br/>
-            Tip $DEGEN to get extra $HEARD
-          </p>
+          <p>Listen to earn $HEARD and tip $DEGEN</p>
         </div>
         <div className="flex gap-4">
           <ChannelSwitch setChannel={setChannel} />
@@ -30,16 +26,15 @@ export function Nav({ setChannel }: any) {
           </DialogTrigger>
           <ThemeToggle />
         </div>
-        <DialogContent className="sm:max-w-[425px] max-w-[375px]">
-          <LoginWindow
-            farcasterUser={farcasterUser}
-            loading={loading}
-            startFarcasterSignerProcess={startFarcasterSignerProcess}
-            logout={logout}
-          ></LoginWindow>
-        </DialogContent>
+        <div className="mt-6 flex justify-center text-center">
+          <button
+            className="bg-violet-600 hover:bg-violet-700 py-3 px-6 text-white rounded-lg"
+            onClick={login}
+          >
+            Log in
+          </button>
+        </div>
       </Dialog>
-    </div>
     </div>
   );
 }
