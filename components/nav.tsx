@@ -16,14 +16,8 @@ export function Nav({ setChannel }: any) {
         <div className="flex flex-col">
           <h1 className="font-display sm:text-4xl text-3xl">Soundcaster</h1>
           <p>
-            powered by{" "}
-            <a
-              href="https://pinata.cloud"
-              className="underline text-md sm:text-lg"
-              target="_blank"
-            >
-              Pinata
-            </a>
+            Listen to earn $SOUNDS and tip $DEGEN
+            
           </p>
         </div>
         <div className="flex gap-4">
