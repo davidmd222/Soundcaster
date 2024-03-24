@@ -16,7 +16,7 @@ export function Nav({ setChannel }: any) {
         <div className="flex flex-col">
           <h1 className="font-display sm:text-4xl text-3xl">Soundcaster</h1>
           <p>
-            Listen to earn $SOUNDS and tip $DEGEN
+            Listen to earn $HEARD and tip $DEGEN
             
           </p>
         </div>
