@@ -6,16 +6,18 @@ import { LoginWindow } from "./login-window";
 import { useFarcasterIdentity } from "@/utils/use-farcaster-identity";
 import { UserRound } from "lucide-react";
 import { ChannelSwitch } from "./channel-change";
-import { PrivyProvider, usePrivy } from "@privy-io/react-auth";
+import { usePrivy } from "@privy-io/react-auth";
 
 export function Nav({ setChannel }: any) {
   const { login } = usePrivy();
   return (
-    <div className="flex justify-between w-full items-center sm:w-[500px] mt-6">
+    <div className="flex justify-between w-full items-center sm:w-[900px] mt-6">
       <Dialog>
         <div className="flex flex-col">
           <h1 className="font-display sm:text-4xl text-3xl">Soundcaster</h1>
-          <p>Listen to earn $HEARD and tip $DEGEN</p>
+          <p>Listen to Earn $HEARD      <br />
+          Tip $DEGEN to get extra $$HEARD
+          </p>
         </div>
         <div className="flex gap-4">
           <ChannelSwitch setChannel={setChannel} />
