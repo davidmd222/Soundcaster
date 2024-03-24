@@ -20,16 +20,16 @@ const fontDisplay = Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Photocaster',
-  description: 'A photographer focused Farcaster client supporting high res images',
+  title: 'Soundcaster',
+  description: 'An audio focused Farcaster client supporting onchain music',
   openGraph: {
-    title: 'Photocaster',
-    description: 'A photographer focused Farcaster client supporting high res images',
-    url: 'https://photocaster.xyz',
-    siteName: 'Photocaster',
+    title: 'Soundcaster',
+    description: 'An audio focused Farcaster client supporting onchain music',
+    url: 'https://Soundcaster.xyz',
+    siteName: 'Soundcaster',
     images: [
       {
-        url:`https://www.photocaster.xyz/og.png`,
+        url:`https://www.Soundcaster.xyz/`,
         width: 1200,
         height: 630
       }
@@ -39,10 +39,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Photocaster',
-    description: 'A photographer focused Farcaster client supporting high res images',
-    creator: '@pinatacloud',
-    images: ['https://www.photocaster.xyz/og.png'], // Must be an absolute URL
+    title: 'Soundcaster',
+    description: 'An audio focused Farcaster client supporting onchain music',
+    creator: '@soundcaster',
+    images: ['https://www.Soundcaster.xyz/'], // Must be an absolute URL
   },
   icons: {
     icon: '/favicon.svg',

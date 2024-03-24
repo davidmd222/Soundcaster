@@ -157,7 +157,7 @@ export default function UploadForm({ farcasterUser }: FormProps) {
                 <FormControl>
                   <Input
                     disabled={loading ? true : false}
-                    placeholder="Image uploaded from PhotoCast"
+                    placeholder="sound uploaded from Cast"
                     {...field}
                   />
                 </FormControl>
