@@ -26,6 +26,11 @@ export default function Page({}: {
     <div className="flex flex-col min-h-screen w-full sm:px-0 px-3 justify-center items-center gap-6 mb-6">
       <Dialog open={open} onOpenChange={setOpen}>
         <Nav setChannel={setChannel} />
+        <br />
+        <br />
+        <br />
+        <br />
+        <iframe src="https://giphy.com/embed/KBYyUGgDEsILK" width="480" height="240" frameBorder="0" class="giphy-embed"></iframe>
         <Separator className="sm:w-[500px] w-sm" />
         <DialogTrigger asChild>
           <Button className="sm:w-[500px] w-full mt-4" variant="outline">

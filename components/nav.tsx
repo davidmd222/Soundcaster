@@ -11,13 +11,14 @@ export function Nav({ setChannel }: any) {
     useFarcasterIdentity();
 
   return (
-    <div className="flex justify-between w-full items-center sm:w-[500px] mt-6">
+    <div className="fixed top-0 left-40 right-0 z-10 bg-black shadow-md">
+    <div className="flex justify-between w-full items-center sm:w-[900px] mt-6">
       <Dialog>
         <div className="flex flex-col">
           <h1 className="font-display sm:text-4xl text-3xl">Soundcaster</h1>
           <p>
-            Listen to earn $HEARD and tip $DEGEN
-            
+            Listen to Earn $HEARD <br/>
+            Tip $DEGEN to get extra $HEARD
           </p>
         </div>
         <div className="flex gap-4">
@@ -38,6 +39,7 @@ export function Nav({ setChannel }: any) {
           ></LoginWindow>
         </DialogContent>
       </Dialog>
+    </div>
     </div>
   );
 }
