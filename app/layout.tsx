@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
 import { Righteous as Display } from 'next/font/google';
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
     siteName: 'Soundcaster',
     images: [
       {
-        url:`https://www.Soundcaster.xyz/`,
+        url: `https://www.Soundcaster.xyz/`,
         width: 1200,
         height: 630
       }
@@ -55,8 +56,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <html lang='en'>
-            <head>
+    <html lang='en'>
+      <head>
         <link rel="icon" href="/favicon.svg" sizes="any" />
       </head>
 
@@ -67,15 +68,15 @@ export default function RootLayout({
           fontDisplay.variable,
         )}
       >
-          <ThemeProvider
-            attribute='class'
-            defaultTheme='system'
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-            <Analytics />
-          </ThemeProvider>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );
